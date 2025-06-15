@@ -1,6 +1,10 @@
-from fastapi import FastAPI
-from typing import Optional
+from fastapi import FastAPI, HTTPException
+from typing import Optional, List, Dict, Any
 from models import Item, User
+
+# In-memory storage
+items: List[Item] = []
+users: List[User] = [], User
 
 # Create a FastAPI instance
 app = FastAPI()
@@ -40,4 +44,8 @@ async def read_user(user_id: int):
 async def read_all_users():
     return users
 
-# Run with: uvicorn main:app --reload
+if __name__ == "__main__":
+    import uvicorn
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
